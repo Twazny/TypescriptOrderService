@@ -1,9 +1,12 @@
 const path = require('path');
 module.exports = {
-    entry: './client/src/index.ts',
+    entry: {
+        index: './client/src/index.ts',
+        sw: './client/src/service-worker.ts'
+    },
     mode: 'development',
     output: {
-        filename: 'app-bundle.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'build'),
     },
     resolve: {
