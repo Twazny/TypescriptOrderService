@@ -1,10 +1,10 @@
-const version: string = '1.0'
-const cacheKey: string = `orders_${version}`
+const version = '1.0'
+const cacheKey = `orders_${version}`
 
-const cacheFirst: string[] = ['/api/orders']
-const networkFirst: string[] = ['/api/ordertypes']
+const cacheFirst = ['/api/orders']
+const networkFirst = ['/api/ordertypes']
 
-self.addEventListener('activate', function (event: ExtendableEvent) {
+self.addEventListener('activate', function (event) {
 
     console.log(`Service Worker version: ${version} activated.`)    
     event.waitUntil(
@@ -19,10 +19,10 @@ self.addEventListener('activate', function (event: ExtendableEvent) {
             );
         })
     );
-    return {}
+    return self.clients.claim();
 });
 
-self.addEventListener('fetch', function (event: FetchEvent) {
+self.addEventListener('fetch', function (event) {
     console.log(event);
     event.respondWith(
         caches.open(cacheKey).then(cache => {
@@ -34,7 +34,8 @@ self.addEventListener('fetch', function (event: FetchEvent) {
                 cache.put(req, tocache);
                 return res
             }).catch(err => {
-                return <Promise<Response>>caches.match(req);
+                console.log(err)
+                return caches.match(req);
             })
 
         })

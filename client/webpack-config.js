@@ -2,7 +2,6 @@ const path = require('path');
 module.exports = {
     entry: {
         index: './client/src/index.ts',
-        sw: './client/src/service-worker.ts'
     },
     mode: 'development',
     output: {

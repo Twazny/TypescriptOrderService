@@ -3,7 +3,7 @@ import './index.css'
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-        navigator.serviceWorker.register('build/sw.js');
+        navigator.serviceWorker.register('./service-worker.js');
     });
 }
 
